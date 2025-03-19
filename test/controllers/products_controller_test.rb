@@ -1,6 +1,11 @@
 require "test_helper"
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = User.create(name: "Test", email: "test@test.com", password: "password", admin: true)
+    post "/sessions.json", params: { email: "test@test.com", password: "password" }
+  end
+
   test "index" do
     get "/products.json"
     assert_response 200
@@ -28,6 +33,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       post "/products.json"
       assert_response 422
     end
+
+    cookies.delete("user_id")
+    post "/products.json"
+    assert_response 401
   end
 
   test "update" do
@@ -43,6 +52,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     patch "/products/#{product.id}.json", params: { price: -2 }
     assert_response 422
+
+    cookies.delete("user_id")
+    patch "/products/#{product.id}.json"
+    assert_response 401
   end
 
   test "destroy" do
@@ -50,5 +63,9 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       delete "/products/#{Product.first.id}.json"
       assert_response 200
     end
+
+    cookies.delete("user_id")
+    delete "/products/#{Product.first.id}.json"
+    assert_response 401
   end
 end
