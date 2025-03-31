@@ -19,3 +19,17 @@ Image.create!(product_id: product4.id, url: "http://cdn.shopify.com/s/files/1/02
 Image.create!(product_id: product5.id, url: "https://s-media-cache-ak0.pinimg.com/736x/9c/15/7b/9c157bea5331463f9c539cbce739a4b8.jpg")
 Image.create!(product_id: product6.id, url: "https://sketchfab.com/blogs/community/wp-content/uploads/2020/04/image2-2.jpg")
 Image.create!(product_id: product7.id, url: "https://staticdelivery.nexusmods.com/mods/1151/images/12353-0-1461721930.png")
+
+category1 = Category.create(name: "Weapons")
+category2 = Category.create(name: "Household goods")
+category3 = Category.create(name: "Star Wars")
+
+CategoryProduct.create(category_id: category2.id, product_id: product1.id)
+CategoryProduct.create(category_id: category2.id, product_id: product2.id)
+CategoryProduct.create(category_id: category1.id, product_id: product3.id)
+CategoryProduct.create(category_id: category3.id, product_id: product3.id)
+CategoryProduct.create(category_id: category1.id, product_id: product4.id)
+CategoryProduct.create(category_id: category2.id, product_id: product5.id)
+CategoryProduct.create(category_id: category1.id, product_id: product6.id)
+CategoryProduct.create(category_id: category2.id, product_id: product7.id)
+CategoryProduct.create(category_id: category3.id, product_id: product7.id)
