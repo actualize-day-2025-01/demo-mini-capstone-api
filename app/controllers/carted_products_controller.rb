@@ -1,7 +1,7 @@
 class CartedProductsController < ApplicationController
   def index
     @carted_products = CartedProduct.where(user_id: current_user.id, status: "carted")
-    render json: @carted_products
+    render :index
   end
 
   def create
@@ -13,7 +13,7 @@ class CartedProductsController < ApplicationController
       order_id: nil
     )
     if @carted_product.valid?
-      render json: @carted_product
+      render :show
     else
       render json: { errors: @carted_product.errors.full_messages }, status: 422
     end
