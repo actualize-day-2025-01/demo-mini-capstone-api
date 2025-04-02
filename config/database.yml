@@ -78,7 +78,6 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  url: <%= ENV["DATABASE_URL"] %>
   primary: &primary_production
     <<: *default
     database: demo_mini_capstone_api_production
